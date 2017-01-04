@@ -1,0 +1,78 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "ac8bbd7cfd5aeb993c78076195882346",
+    "content-hash": "87e71dbef4a5af95f8ccf8fd8bbd9e22",
+    "packages": [
+        {
+            "name": "sparklit/adbutler-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adbutler/adbutler-php.git",
+                "reference": "3243129f7254479d8da60a06f66fcf20992c5a36"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adbutler/adbutler-php/zipball/3243129f7254479d8da60a06f66fcf20992c5a36",
+                "reference": "3243129f7254479d8da60a06f66fcf20992c5a36",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AdButler\\": [
+                        "lib/",
+                        "lib/Resource"
+                    ]
+                },
+                "files": [
+                    "lib/Utils.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SparkLIT and contributors",
+                    "homepage": "https://github.com/sparklit/adbutler-php/graphs/contributors"
+                }
+            ],
+            "description": "AdButler PHP Library",
+            "homepage": "https://adbutler.com/",
+            "keywords": [
+                "ad serving",
+                "adbutler",
+                "api"
+            ],
+            "support": {
+                "source": "https://github.com/adbutler/adbutler-php/tree/0.0.1",
+                "issues": "https://github.com/adbutler/adbutler-php/issues"
+            },
+            "time": "2016-12-03 00:52:15"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "sparklit/adbutler-php": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
