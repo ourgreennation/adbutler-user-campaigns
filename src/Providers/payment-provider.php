@@ -30,7 +30,7 @@ class Payment_Provider implements Provider {
 	 * Provide
 	 *
 	 * @since  v0.1.0
-	 * @param  mixed[] $args Variable number of arguments
+	 * @param  mixed[] ...$args Variable number of arguments.
 	 * @return array An array that describes the creatives registered to the post
 	 */
 	public function provide( ...$args ) {

@@ -20,9 +20,9 @@ trait Post_Type_Utils {
 	 * Fill Post Type Args with Labels
 	 *
 	 * @since  v0.1.0
-	 * @param  array $args      An array of Post_Type arguments to add labels to
-	 * @param  string $singular A string representation of the singular post type label
-	 * @param  string $plural   A string representation of the plural post type label
+	 * @param  array  $args      An array of Post_Type arguments to add labels to.
+	 * @param  string $singular A string representation of the singular post type label.
+	 * @param  string $plural   A string representation of the plural post type label.
 	 * @return array            An arrya of Post_Type arguments with labels attached
 	 */
 	function fill_post_type_args_labels( $args, $singular, $plural ) {
@@ -64,9 +64,9 @@ trait Post_Type_Utils {
 	 * Fill Post Type Args
 	 *
 	 * @since  v0.1.0
-	 * @param  array  $args     An array of Post_Type arguments
-	 * @param  string $singular String representation of the singular post type label
-	 * @param  string $plural   String representation of the plural post type label
+	 * @param  array  $args     An array of Post_Type arguments.
+	 * @param  string $singular String representation of the singular post type label.
+	 * @param  string $plural   String representation of the plural post type label.
 	 * @return array            An array of Post_Type arguments filled with typical defaults
 	 */
 	public function fill_post_type_args( $args = array(), $singular = 'item', $plural = 'items' ) {
@@ -89,10 +89,10 @@ trait Post_Type_Utils {
 			'capability_type'       => 'post',
 		);
 
-		// Fill the labels
+		// Fill the labels.
 		$labelled = $this->fill_post_type_args_labels( $defaults, $singular, $plural );
 
-		// Merge the user provided arguments with our defaults
+		// Merge the user provided arguments with our defaults.
 		return array_merge( $labelled, $args );
 	}
 }

@@ -21,7 +21,7 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 	 * Get Creatives
 	 *
 	 * @since  v0.1.0
-	 * @param  int    $post_id WP_Post ID
+	 * @param  int $post_id WP_Post ID.
 	 * @return array           An array of creatives
 	 */
 	public function get_creatives( $post_id ) {

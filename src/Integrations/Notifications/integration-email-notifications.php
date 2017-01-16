@@ -24,6 +24,8 @@ use Lift\AdbutlerUserCampaigns\Providers\Email_Provider;
  */
 class Integration_Email_Notifications extends Integration implements Plugin_Integration {
 	/**
+	 * Email Provider
+	 *
 	 * @var Email_Provider
 	 */
 	public $email_provider;
@@ -39,7 +41,8 @@ class Integration_Email_Notifications extends Integration implements Plugin_Inte
 	 * Constructor
 	 *
 	 * @since  v0.1.0
-	 * @param Hook_Catalog $hook_catalog Instance of Hook_Catalog to register hooks to.
+	 * @param Hook_Catalog     $hook_catalog Instance of Hook_Catalog to register hooks to.
+	 * @param array|Provider[] ...$providers Variadic Providers.
 	 * @return Integration_Email_Notification Instance of self
 	 */
 	public function __construct( Hook_Catalog $hook_catalog, Provider ... $providers ) {

@@ -28,7 +28,7 @@ class Creative_Meta implements Provider {
 	 * Provide
 	 *
 	 * @since  v0.1.0
-	 * @param  mixed[] $args Variable number of arguments
+	 * @param  mixed[] ...$args Variable number of arguments.
 	 * @return array An array that describes the creatives registered to the post
 	 */
 	public function provide( ...$args ) {
@@ -40,7 +40,7 @@ class Creative_Meta implements Provider {
 	 *
 	 * @todo   This is the base class, needs defaults if publicly released.
 	 * @since  v0.1.0
-	 * @param  int   $post_id Post ID
+	 * @param  int $post_id Post ID.
 	 * @return array          An array that describes the creatives registered to the post
 	 */
 	public function get_creatives( $post_id ) {

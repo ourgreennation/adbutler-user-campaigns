@@ -40,6 +40,7 @@ class Integration_Payments extends Integration implements Plugin_Integration {
 
 	/**
 	 * Javascript Callaback
+	 *
 	 * @var string
 	 */
 	protected $default_js_callback = 'alert("No Payment Process Configured.")';
@@ -156,12 +157,12 @@ class Integration_Payments extends Integration implements Plugin_Integration {
 		// Register Externals for Providers to use as dependencies.
 		$this->register_external_js();
 
-		// Register the Bundle
+		// Register the Bundle.
 		$url = ADBUTLER_CONTRIBUTED_CREATIVES_URI . '/scripts/bundle.js';
 		$ver = ADBUTLER_CONTRIBUTED_CREATIVES_VERSION;
-		return wp_register_script( 'adbutler_cc\bundle', $url, [], $ver, true );
+		wp_register_script( 'adbutler_cc\bundle', $url, [], $ver, true );
 
-		// Load Provider Javascript
+		// Load Provider Javascript.
 		$this->payment_provider->load_javascript();
 	}
 

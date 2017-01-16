@@ -18,8 +18,21 @@ use Lift\AdbutlerUserCampaigns\Interfaces\Provider;
  */
 abstract class Integration implements Plugin_Integration {
 
+	/**
+	 * Hook Catalog
+	 *
+	 * @var Hook_Catalog
+	 */
 	protected $hook_catalog;
 
+	/**
+	 * Constructor
+	 *
+	 * @param Hook_Catalog     $hook_catalog Hook Catalog.
+	 * @param array|Provider[] ...$providers Array of Providers.
+	 *
+	 * @return  Integration Instance of self
+	 */
 	public function __construct( Hook_Catalog $hook_catalog, Provider ...$providers ) {
 		$this->hook_catalog = $hook_catalog;
 		return $this;
@@ -67,8 +80,8 @@ abstract class Integration implements Plugin_Integration {
 	 * Add Integration
 	 *
 	 * @since v2.0.0
-	 * @param string      $tag      String reference to the hook to apply function to
-	 * @param string      $method   Method to hook to $tag
+	 * @param string      $tag      String reference to the hook to apply function to.
+	 * @param string      $method   Method to hook to $tag.
 	 * @param int|integer $priority Priority in which it should run, default 10.
 	 * @param int|integer $args     Number of arguments to pass to the method, default 1.
 	 *
@@ -84,23 +97,23 @@ abstract class Integration implements Plugin_Integration {
 	 * Helper: Should we continue execution in save_post hook?
 	 *
 	 * @since  v0.1.0
-	 * @param  int    $post_id WP_Post ID
+	 * @param  int $post_id WP_Post ID.
 	 * @return bool            True if execution should cease, false otherwise.
 	 */
 	final protected static function _save_post_hook_should_cease_execution( $post_id ) {
-		// Autosave, do nothing
+		// Autosave, do nothing.
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return true;
 		}
-		// AJAX? Not used here
+		// AJAX? Not used here.
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return true;
 		}
-		// Check user permissions
+		// Check user permissions.
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return true;
 		}
-		// Return if it's a post revision
+		// Return if it's a post revision.
 		if ( false !== wp_is_post_revision( $post_id ) ) {
 			return true;
 		}

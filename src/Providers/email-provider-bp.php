@@ -38,8 +38,8 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 	 * Notify Site Admin
 	 *
 	 * @since  v0.1.0
-	 * @param  \WP_Post $post WP_Post object
-	 * @return void
+	 * @param  \WP_Post $post WP_Post object.
+	 * @return bool|void
 	 */
 	public function notify_site_admin( \WP_Post $post ) {
 		if ( ! $author = intval( $post->post_author ) ) {
@@ -72,8 +72,8 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 	 * Notify Campaign Author
 	 *
 	 * @since  v0.1.0
-	 * @param  \WP_Post $post WP_Post object
-	 * @return void
+	 * @param  \WP_Post $post WP_Post object.
+	 * @return bool|void
 	 */
 	public function notify_campaign_author( \WP_Post $post ) {
 		if ( ! $author = intval( $post->post_author ) ) {
@@ -134,7 +134,7 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 	 * Creates a BuddyPress Email Template to be sent to administrators when a new campaign
 	 * is submitted to review.  Run once on activation if no email exists with this name.
 	 *
-	 * @return void
+	 * @return void|null
 	 */
 	protected function _create_site_admin_notification() {
 		if ( $this->_site_admin_notification_exists() ) {
@@ -169,7 +169,7 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 	 * approved.  Runs once on activation is no email exists with the given name.
 	 *
 	 * @since  v0.1.0
-	 * @return void
+	 * @return void|null
 	 */
 	protected function _create_campaign_author_notification() {
 		if ( $this->_site_admin_notification_exists() ) {

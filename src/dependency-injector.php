@@ -22,12 +22,14 @@ use Lift\AdbutlerUserCampaigns\Providers\BP_Email_Provider;
 class Dependency_Injector {
 	/**
 	 * Required Dependencies
+	 *
 	 * @var string[]
 	 */
 	protected $required;
 
 	/**
 	 * Dependencies Registered to the Injector
+	 *
 	 * @var mixed[]
 	 */
 	protected $dependencies;
@@ -138,7 +140,7 @@ class Dependency_Injector {
 	 * Inject
 	 *
 	 * @since  v0.1.0
-	 * @param  string     $reference  Dependency Reference
+	 * @param  string $reference  Dependency Reference.
 	 * @return mixed|null             The dependency
 	 */
 	public function inject( $reference ) {
@@ -152,8 +154,8 @@ class Dependency_Injector {
 	 * Register Dependency
 	 *
 	 * @since  v0.1.0
-	 * @param  string $reference   String to reference the dependency by
-	 * @param  mixed  $dependency  The class to register
+	 * @param  string $reference   String to reference the dependency by.
+	 * @param  mixed  $dependency  The class to register.
 	 * @return Dependency_Injector Instance of self
 	 */
 	public function register_dependency( $reference, $dependency ) {

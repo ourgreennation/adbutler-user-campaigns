@@ -13,15 +13,22 @@ use Lift\AdbutlerUserCampaigns\Interfaces\Plugin_Integration;
 use Lift\AdbutlerUserCampaigns\Interfaces\Provider;
 
 
-// Vendor
+// Vendor.
 use \AdButler\BannerCampaign;
 
+/**
+ * Integration: Create Campaign
+ *
+ * @since  v0.1.0
+ */
 class Integration_Create_Campaign extends Integration implements Plugin_Integration {
 
 	/**
 	 * Constructor
 	 *
-	 * @param Hook_Catalog $hook_catalog The main Hook_Catalog instance
+	 * @param Hook_Catalog     $hook_catalog The main Hook_Catalog instance.
+	 * @param array|Provider[] ...$providers Array of providers.
+	 * @return  Integration_Create_Campaign Instance of self.
 	 */
 	public function __construct( Hook_Catalog $hook_catalog, Provider ...$providers ) {
 		parent::__construct( $hook_catalog );
@@ -39,6 +46,7 @@ class Integration_Create_Campaign extends Integration implements Plugin_Integrat
 	 */
 	public function must_create_campaign_if_not_exists() {
 		$this->add_hook( 'save_post', 'create_campaign_on_save_post', 20, 3 );
+		return true;
 	}
 
 	/**
@@ -46,9 +54,10 @@ class Integration_Create_Campaign extends Integration implements Plugin_Integrat
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/save_post/
 	 * @uses   Integration::_save_post_hook_should_cease_execution()
+	 *
 	 * @since  v0.1.0
-	 * @param  int      $post_id \WP_Post::id
-	 * @param  \WP_Post $post    \WP_Post object
+	 * @param  int      $post_id \WP_Post::$ID.
+	 * @param  \WP_Post $post    \WP_Post object.
 	 * @param  bool     $update  True if this is a post being updated.
 	 * @return bool              True on success, false if no action taken.
 	 */
@@ -60,7 +69,7 @@ class Integration_Create_Campaign extends Integration implements Plugin_Integrat
 			return;
 		}
 
-		// Run a helper check to make sure we have all the right condition
+		// Run a helper check to make sure we have all the right condition.
 		if ( self::_save_post_hook_should_cease_execution( $post_id ) ) {
 			return false;
 		}
@@ -71,7 +80,7 @@ class Integration_Create_Campaign extends Integration implements Plugin_Integrat
 			return false;
 		}
 
-		// We also need to make sure we have an advertiser id to work with
+		// We also need to make sure we have an advertiser id to work with.
 		$user_id = intval( $post->post_author );
 		$advertiser_id = get_user_meta( $user_id, 'adbutler_advertiser_id', true );
 		if ( empty( $advertiser_id ) ) {
@@ -113,8 +122,8 @@ class Integration_Create_Campaign extends Integration implements Plugin_Integrat
 	 *
 	 * @uses   \AdButler\BannerCampaign::create()
 	 * @since  v0.1.0
-	 * @param  string $name 		WordPress Post Title
-	 * @param  int    $advertiser   AdButler Advertiser ID
+	 * @param  string $name 		WordPress Post Title.
+	 * @param  int    $advertiser   AdButler Advertiser ID.
 	 * @return \Adbutler\BannerCampaign
 	 */
 	public function create_campaign( $name, $advertiser ) {

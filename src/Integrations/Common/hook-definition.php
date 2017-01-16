@@ -19,30 +19,35 @@ class Hook_Definition {
 
 	/**
 	 * Tag to hook method to
+	 *
 	 * @var string
 	 */
 	public $tag;
 
 	/**
 	 * Callable function to call on $tag
+	 *
 	 * @var callable
 	 */
 	public $callable;
 
 	/**
 	 * Priority to call the function with
+	 *
 	 * @var integer
 	 */
 	public $priority;
 
 	/**
 	 * Number of arguments to pass to the function
+	 *
 	 * @var integer
 	 */
 	public $args;
 
 	/**
 	 * If this HookDefinition was added to the WordPress event system, default false.
+	 *
 	 * @var boolean
 	 */
 	public $added = false;
@@ -51,10 +56,10 @@ class Hook_Definition {
 	 * Constructor
 	 *
 	 * @since  v0.1.0
-	 * @param string      $tag      The tag to hook the function to
-	 * @param callable    $callable The function hooked to the tag
-	 * @param int|integer $priority The priority to call the function with
-	 * @param int|integer $args     The number of arguments to pass to the function
+	 * @param string      $tag      The tag to hook the function to.
+	 * @param callable    $callable The function hooked to the tag.
+	 * @param int|integer $priority The priority to call the function with.
+	 * @param int|integer $args     The number of arguments to pass to the function.
 	 * @return  self instance
 	 */
 	public function __construct( $tag, $callable, $priority = 10, $args = 1 ) {

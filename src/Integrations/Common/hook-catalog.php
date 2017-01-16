@@ -19,7 +19,8 @@ class Hook_Catalog {
 
 	/**
 	 * Entries
-	 * @var HookDefinition[]
+	 *
+	 * @var Hook_Definition[]
 	 */
 	public $entries;
 
@@ -38,7 +39,7 @@ class Hook_Catalog {
 	 * Get Catalog Entries
 	 *
 	 * @since  v0.1.0
-	 * @return HookDefinition[]
+	 * @return Hook_Definition[]
 	 */
 	public function get_catalog_entries() {
 		return $this->entries;
@@ -48,8 +49,8 @@ class Hook_Catalog {
 	 * Add Entry
 	 *
 	 * @since  v0.1.0
-	 * @param HookDefinition $entry HookDefinition to add to catalog
-	 * @return  HookDefinition[]	An array of the stored HookDefinitions
+	 * @param Hook_Definition $entry HookDefinition to add to catalog.
+	 * @return  Hook_Definition[]	An array of the stored HookDefinitions
 	 */
 	public function add_entry( Hook_Definition $entry ) {
 		array_push( $this->entries, $entry->add() );
@@ -60,9 +61,9 @@ class Hook_Catalog {
 	 * Remove Entry
 	 *
 	 * @since  v0.1.0
-	 * @param  string   $tag      The tag identifying the entry to remove
-	 * @param  callable $callable The callable function/method hooked to the tag
-	 * @return HookDefinition[]   An array of the stored HookDefinitions
+	 * @param  string   $tag      The tag identifying the entry to remove.
+	 * @param  callable $callable The callable function/method hooked to the tag.
+	 * @return Hook_Definition[]   An array of the stored HookDefinitions
 	 */
 	public function remove_entry( string $tag, callable $callable ) {
 		return $this->entries = array_filter(

@@ -19,8 +19,13 @@ use Lift\AdbutlerUserCampaigns\Interfaces\Provider;
  */
 class Email_Provider implements Provider {
 
-	public function construct() {}
-
+	/**
+	 * Provide
+	 *
+	 * @since  v0.1.0
+	 * @param  mixed[] ...$args Arguments.
+	 * @return Email_Provider   Instance of self
+	 */
 	public function provide( ...$args ) {
 		return $this;
 	}

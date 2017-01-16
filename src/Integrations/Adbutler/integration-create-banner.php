@@ -13,14 +13,20 @@ use Lift\AdbutlerUserCampaigns\Interfaces\Plugin_Integration;
 use Lift\AdbutlerUserCampaigns\Interfaces\Provider;
 use Lift\AdbutlerUserCampaigns\Providers\Creative_Meta;
 
-// Vendor
+// Vendor.
 use \AdButler\ImageBanner;
 use \AdButler\CampaignAssignment;
 
+/**
+ * Integration: Create Banner
+ *
+ * @since  v0.1.0
+ */
 class Integration_Create_Banner extends Integration implements Plugin_Integration {
 
 	/**
 	 * Post Meta Provider
+	 *
 	 * @var Creative_Meta
 	 */
 	protected $post_meta_provider;
@@ -28,7 +34,9 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 	/**
 	 * Constructor
 	 *
-	 * @param Hook_Catalog $hook_catalog The main Hook_Catalog instance
+	 * @param Hook_Catalog     $hook_catalog The main Hook_Catalog instance.
+	 * @param array|Provider[] ...$providers Variadic array of Providers.
+	 * @return Integration_Create_Banner
 	 */
 	public function __construct( Hook_Catalog $hook_catalog, Provider ...$providers ) {
 		parent::__construct( $hook_catalog );
@@ -43,6 +51,7 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 
 	/**
 	 * [Must] Create Creatives if they don't exist
+	 *
 	 * @return void
 	 */
 	public function must_create_banner_if_not_exists() {
@@ -53,16 +62,16 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 	 * Create Banners on `save_post` hook
 	 *
 	 * @since  v0.1.0
-	 * @param  int      $post_id WP_Post ID
-	 * @param  \WP_Post $post    WP_Post object
-	 * @param  bool     $update  If this is an update
+	 * @param  int      $post_id WP_Post ID.
+	 * @param  \WP_Post $post    WP_Post object.
+	 * @param  bool     $update  If this is an update.
 	 * @return void
 	 */
 	public function create_banner_on_save_post( $post_id, \WP_Post $post, $update ) {
 		if ( 'adbutler_campaign' !== $post->post_type ) {
 			return;
 		}
-		// Run a helper check to make sure we have all the right condition
+		// Run a helper check to make sure we have all the right condition.
 		if ( self::_save_post_hook_should_cease_execution( $post_id ) ) {
 			return false;
 		}
@@ -73,7 +82,7 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 
 		if ( ! empty( $creatives ) && false !== $advertiser_id && false !== $campaign_id ) {
 			foreach ( $creatives as $index => $creative ) {
-				// Don't create any banners that already have a creative id
+				// Don't create any banners that already have a creative id.
 				if ( isset( $creative['advertisement_id'] ) && ! empty( $creative['advertisement_id'] ) ) {
 					continue;
 				}
@@ -112,7 +121,7 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 	 * Fields Present On
 	 *
 	 * @since  v0.1.0
-	 * @param  array  $creative A creative array
+	 * @param  array $creative A creative array.
 	 * @return bool             Returns true if required fields are present, false otherwise.
 	 */
 	public function fields_present_on( array $creative ) {
@@ -131,10 +140,10 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 	 * Create Creative
 	 *
 	 * @since  v0.1.0
-	 * @param  string $name         Name of Creative
-	 * @param  string $creative_url URL of Creative
-	 * @param  string $location     URL to direct clicks to
-	 * @param  string $alt          Screen reader text
+	 * @param  string $name         Name of Creative.
+	 * @param  string $creative_url URL of Creative.
+	 * @param  string $location     URL to direct clicks to.
+	 * @param  string $alt          Screen reader text.
 	 * @return ImageBanner          ImageBanner object
 	 */
 	public function create_banner( $name, $creative_url, $location, $alt ) {
@@ -165,9 +174,9 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 	 * Link Creative
 	 *
 	 * @since  v0.1.0
-	 * @param  array  $creative_data An ImageBanner array
-	 * @param  int    $advertiser_id An advertiser ID of the current user
-	 * @param  int    $campaign_id   Campaign ID of the campaign this creative is in
+	 * @param  array $creative_data An ImageBanner array.
+	 * @param  int   $advertiser_id An advertiser ID of the current user.
+	 * @param  int   $campaign_id   Campaign ID of the campaign this creative is in.
 	 * @return CampaignAssignment    CampaignAssignment object
 	 */
 	public function link_banner( $creative_data, $advertiser_id, $campaign_id ) {

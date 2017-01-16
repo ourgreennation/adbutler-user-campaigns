@@ -15,5 +15,12 @@ namespace Lift\AdbutlerUserCampaigns\Interfaces;
  */
 interface Provider {
 
+	/**
+	 * Provide
+	 *
+	 * @since  v0.1.0
+	 * @param  array|mixed[] ...$args Arguments.
+	 * @return mixed
+	 */
 	public function provide( ...$args );
 }
