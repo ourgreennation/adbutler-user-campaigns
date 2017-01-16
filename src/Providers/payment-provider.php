@@ -53,5 +53,4 @@ class Payment_Provider implements Provider {
 	public function get_js_callback() {
 		return 'alert("No Payment Process Configured")';
 	}
-
 }

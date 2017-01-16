@@ -73,6 +73,7 @@ class Hook_Catalog {
 					return false;
 				}
 				return true;
-			});
+			}
+		);
 	}
 }

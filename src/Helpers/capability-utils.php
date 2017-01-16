@@ -26,7 +26,7 @@ trait Capability_Utils {
 	 * @return void
 	 */
 	final protected static function grant_capabilities( \WP_Role $role, array $caps ) {
-		foreach( $caps as $cap ) {
+		foreach ( $caps as $cap ) {
 			$role->add_cap( strval( $cap ) );
 		}
 	}
@@ -40,7 +40,7 @@ trait Capability_Utils {
 	 * @return void
 	 */
 	final protected static function ungrant_capabilities( \WP_Role $role, array $caps ) {
-		foreach( $caps as $cap ) {
+		foreach ( $caps as $cap ) {
 			$role->remove_cap( $cap );
 		}
 	}

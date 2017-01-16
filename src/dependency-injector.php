@@ -105,7 +105,7 @@ class Dependency_Injector {
 	 * @return Creative_Meta An instance of child of Creative_Meta
 	 */
 	public function register_creative_meta_provider() {
-		if( function_exists('acf_add_local_field_group') ) {
+		if ( function_exists( 'acf_add_local_field_group' ) ) {
 			return new ACF_Creative_Meta;
 		}
 		return new Creative_Meta;
@@ -143,7 +143,7 @@ class Dependency_Injector {
 	 */
 	public function inject( $reference ) {
 		if ( array_key_exists( $reference, $this->dependencies ) ) {
-			return $this->dependencies[$reference];
+			return $this->dependencies[ $reference ];
 		}
 		return null;
 	}
@@ -156,8 +156,8 @@ class Dependency_Injector {
 	 * @param  mixed  $dependency  The class to register
 	 * @return Dependency_Injector Instance of self
 	 */
-	public function register_dependency ( $reference, $dependency ) {
-		$this->dependency[$reference] = $dependency;
+	public function register_dependency( $reference, $dependency ) {
+		$this->dependency[ $reference ] = $dependency;
 
 		return $this;
 	}
@@ -169,8 +169,8 @@ class Dependency_Injector {
 	 * @return bool True if all required dependencies can be resolved, false otherwise.
 	 */
 	public function ensure_dependencies() {
-		foreach( $this->required as $req_dep ) {
-			if( ! isset( $this->dependencies[$req_dep] ) || is_null( $this->dependencies[$req_dep] ) ) {
+		foreach ( $this->required as $req_dep ) {
+			if ( ! isset( $this->dependencies[ $req_dep ] ) || is_null( $this->dependencies[ $req_dep ] ) ) {
 				return false;
 			}
 		}

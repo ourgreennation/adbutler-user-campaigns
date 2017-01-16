@@ -44,7 +44,7 @@ abstract class Integration implements Plugin_Integration {
 
 		$added_integrations = array();
 
-		foreach( $integrations as $integration ) {
+		foreach ( $integrations as $integration ) {
 			array_push( $added_integrations, $this->$integration() ? $this->$integration() : false );
 		}
 
@@ -59,7 +59,7 @@ abstract class Integration implements Plugin_Integration {
 	 */
 	public function get_all_hooks() {
 		return array_filter( $this->hook_catalog->entries, function( $entry ) use ( $class ) {;
-			return ( $this === get_class( $entry->callable[0] ) );
+			return ( get_class( $entry->callable[0] ) === $this );
 		});
 	}
 

@@ -54,7 +54,7 @@ class Integration_Payments extends Integration implements Plugin_Integration {
 	 */
 	public function __construct( Hook_Catalog $hook_catalog, Provider ...$providers ) {
 		$this->hook_catalog = $hook_catalog;
-		if( isset( $providers[0] ) && $providers[0] instanceof Payment_Provider ) {
+		if ( isset( $providers[0] ) && $providers[0] instanceof Payment_Provider ) {
 			$this->payment_provider = $providers[0];
 		}
 		return $this;

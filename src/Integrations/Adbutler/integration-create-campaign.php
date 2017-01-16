@@ -67,7 +67,7 @@ class Integration_Create_Campaign extends Integration implements Plugin_Integrat
 
 		// Let's see if this is assocaiated with an AdButler Campaign, if it is, we're done.
 		$campaign_id = get_post_meta( intval( $post_id ), 'adbutler_campaign_id', true );
-		if( is_numeric( $campaign_id ) ) {
+		if ( is_numeric( $campaign_id ) ) {
 			return false;
 		}
 
@@ -85,12 +85,12 @@ class Integration_Create_Campaign extends Integration implements Plugin_Integrat
 		// Okay, we have stuff to do.
 		try {
 			// The title is stored in $_POST, so let's extract and clean it up.
-			$title = sanitize_text_field( $_POST['post_title'] );
+			$title = sanitize_text_field( wp_unslash( $_POST['post_title'] ) );
 			// Okay, send off the request.
 			$response = $this->create_campaign( $title , intval( $advertiser_id ) );
 			$data = $response->getData();
 		} catch ( \Exception $e ) {
-			wp_die( $e->getMessage() );
+			wp_die( 'Client Error' . esc_html( $e->getMessage() ) );
 		}
 
 		// If we didn't catch and die above, we probably have a good campaign id.  Let's make sure.
@@ -99,7 +99,7 @@ class Integration_Create_Campaign extends Integration implements Plugin_Integrat
 		}
 		$success = update_post_meta( $post_id, 'adbutler_campaign_id', intval( $data['id'] ) );
 
-		if( false === $success ) {
+		if ( false === $success ) {
 			wp_die( 'Could not save AdButler Campaign ID.  Please try again.' );
 		}
 
@@ -122,7 +122,7 @@ class Integration_Create_Campaign extends Integration implements Plugin_Integrat
 			'name' => esc_html( $name ),
 			'advertiser' => intval( $advertiser ),
 			'height' => 250,
-			'width' => 300
-			]);
+			'width' => 300,
+		]);
 	}
 }

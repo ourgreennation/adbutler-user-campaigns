@@ -34,7 +34,7 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 		parent::__construct( $hook_catalog );
 
 		// We expect a single provider.
-		if( isset( $providers[0] ) && $providers[0] instanceof Creative_Meta ) {
+		if ( isset( $providers[0] ) && $providers[0] instanceof Creative_Meta ) {
 			$this->post_meta_provider = $providers[0];
 		}
 
@@ -74,7 +74,7 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 		if ( ! empty( $creatives ) && false !== $advertiser_id && false !== $campaign_id ) {
 			foreach ( $creatives as $index => $creative ) {
 				// Don't create any banners that already have a creative id
-				if ( isset( $creative['advertisement_id' ] ) && ! empty( $creative['advertisement_id'] ) ) {
+				if ( isset( $creative['advertisement_id'] ) && ! empty( $creative['advertisement_id'] ) ) {
 					continue;
 				}
 
@@ -86,21 +86,21 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 					try {
 						$create = $this->create_banner( $name, $creative_url, $location, $alt );
 						$create_data = $create->getData();
-					} catch( \Exception $e ) {
-						wp_die( 'Client Error: ' . $e->getMessage() );
+					} catch ( \Exception $e ) {
+						wp_die( 'Client Error: ' . esc_html( $e->getMessage() ) );
 					}
 
 					try {
 						$link = $this->link_banner( $create_data, $advertiser_id, $campaign_id );
 						$link_data = $link->getData();
 					} catch ( \Exception $e ) {
-						wp_die( 'Link Error: ' . $e->getMessage() );
+						wp_die( 'Link Error: ' . esc_html( $e->getMessage() ) );
 					}
 					update_sub_field( array(
 						'adbutler_campaign_creatives',
 						$index + 1,
-						'advertisement_id'
-						), $create_data['id'] );
+						'advertisement_id',
+					), $create_data['id'] );
 				} else {
 					wp_die( 'Missing fields on Creative' );
 				}
@@ -118,8 +118,8 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 	public function fields_present_on( array $creative ) {
 		$required_fields = [ 'name', 'creative', 'location', 'html_alt_text' ];
 
-		foreach( $required_fields as $req_field ) {
-			if ( ! isset( $creative[$req_field] ) ) {
+		foreach ( $required_fields as $req_field ) {
+			if ( ! isset( $creative[ $req_field ] ) ) {
 				return false;
 			}
 		}
@@ -138,7 +138,7 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 	 * @return ImageBanner          ImageBanner object
 	 */
 	public function create_banner( $name, $creative_url, $location, $alt ) {
-		if( defined( 'ADBUTLER_CONTRIBUTED_CREATIVES_TEST' ) && ADBUTLER_CONTRIBUTED_CREATIVES_TEST ) {
+		if ( defined( 'ADBUTLER_CONTRIBUTED_CREATIVES_TEST' ) && ADBUTLER_CONTRIBUTED_CREATIVES_TEST ) {
 			$creative_url = 'http://www.lipsum.com/images/banners/black_300x250.gif';
 		}
 
@@ -147,14 +147,14 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 			'creative_url' => $creative_url,
 			'height' => 250,
 			'width' => 300,
-			'html_target' => '_blank'
+			'html_target' => '_blank',
 			);
 
-		if( $location ) {
+		if ( $location ) {
 			$params['location'] = $location;
 		}
 
-		if( $alt ) {
+		if ( $alt ) {
 			$params['html_alt_text'] = $alt;
 		}
 
@@ -175,7 +175,7 @@ class Integration_Create_Banner extends Integration implements Plugin_Integratio
 			'campaign' => intval( $campaign_id ),
 			'advertisement' => [ 'id' => $creative_data['id'], 'type' => 'banner' ],
 			'weight' => 2,
-			'active' => true
-			]);
+			'active' => true,
+		]);
 	}
 }

@@ -37,12 +37,12 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 	 * @return void
 	 */
 	public function do_post_meta_box() {
-		if( function_exists('acf_add_local_field_group') ):
-			acf_add_local_field_group(array (
+		if ( function_exists( 'acf_add_local_field_group' ) ) :
+			acf_add_local_field_group(array(
 				'key' => 'group_586c3e6c6e296',
 				'title' => 'Add Your Creatives',
-				'fields' => array (
-					array (
+				'fields' => array(
+					array(
 						'key' => 'field_586c3e88f718d',
 						'label' => 'Campaign Creatives',
 						'name' => 'adbutler_campaign_creatives',
@@ -50,7 +50,7 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 						'instructions' => 'Thanks for advertising with us.	Upload your campaign creatives here, (maximum of 20), just follow the on-screen instructions.',
 						'required' => 1,
 						'conditional_logic' => 0,
-						'wrapper' => array (
+						'wrapper' => array(
 							'width' => '',
 							'class' => '',
 							'id' => '',
@@ -60,8 +60,8 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 						'max' => 20,
 						'layout' => 'row',
 						'button_label' => 'Add Creative',
-						'sub_fields' => array (
-							array (
+						'sub_fields' => array(
+							array(
 								'key' => 'field_586c9fecc7393',
 								'label' => 'Name',
 								'name' => 'name',
@@ -69,7 +69,7 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 								'instructions' => 'Name this something unique that is relevant to your creative.',
 								'required' => 1,
 								'conditional_logic' => 0,
-								'wrapper' => array (
+								'wrapper' => array(
 									'width' => '',
 									'class' => '',
 									'id' => '',
@@ -80,7 +80,7 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 								'append' => '',
 								'maxlength' => 150,
 							),
-							array (
+							array(
 								'key' => 'field_586c3ecef718e',
 								'label' => 'Creative',
 								'name' => 'creative',
@@ -88,7 +88,7 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 								'instructions' => 'Upload a Creative.',
 								'required' => 1,
 								'conditional_logic' => 0,
-								'wrapper' => array (
+								'wrapper' => array(
 									'width' => '',
 									'class' => '',
 									'id' => '',
@@ -104,7 +104,7 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 								'max_size' => '',
 								'mime_types' => '.jpeg, .jpg, .png, .gif',
 							),
-							array (
+							array(
 								'key' => 'field_586c72364bb52',
 								'label' => 'Location',
 								'name' => 'location',
@@ -112,7 +112,7 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 								'instructions' => 'The url you want the user to go if they click on the ad.',
 								'required' => 0,
 								'conditional_logic' => 0,
-								'wrapper' => array (
+								'wrapper' => array(
 									'width' => '',
 									'class' => '',
 									'id' => '',
@@ -120,7 +120,7 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 								'default_value' => '',
 								'placeholder' => 'Target URL',
 							),
-							array (
+							array(
 								'key' => 'field_586c72984bb53',
 								'label' => 'Alt Text',
 								'name' => 'html_alt_text',
@@ -128,7 +128,7 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 								'instructions' => 'Alternative Text to provide to Screen Reader software.',
 								'required' => 0,
 								'conditional_logic' => 0,
-								'wrapper' => array (
+								'wrapper' => array(
 									'width' => '',
 									'class' => '',
 									'id' => '',
@@ -142,9 +142,9 @@ class ACF_Creative_Meta extends Creative_Meta implements Provider {
 						),
 					),
 				),
-				'location' => array (
-					array (
-						array (
+				'location' => array(
+					array(
+						array(
 							'param' => 'post_type',
 							'operator' => '==',
 							'value' => 'adbutler_campaign',

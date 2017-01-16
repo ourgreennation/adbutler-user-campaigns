@@ -73,7 +73,7 @@ trait Post_Type_Utils {
 		$defaults = array(
 			'label'					=> __( $singular, 'adbutler-cc-i18n' ),
 			'description'           => __( 'Custom Post Type', 'adbutler-cc-i18n' ),
-			'supports'              => array( ),
+			'supports'              => array(),
 			'taxonomies'            => array( 'category', 'post_tag' ),
 			'hierarchical'          => false,
 			'public'                => true,

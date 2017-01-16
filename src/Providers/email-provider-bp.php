@@ -58,12 +58,12 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 				'campaign.title' => $post->post_title,
 				'campaign.author' => $author->data->display_name,
 				'campaign.link' => get_edit_post_link( $post->ID ),
-			)
+			),
 		);
 
 		$mail = bp_send_email( 'ad_campaign_submission', $admins, $args );
 
-		if( is_wp_error( $mail ) ) {
+		if ( is_wp_error( $mail ) ) {
 			parent::notify_site_admin( $post );
 		}
 	}
@@ -92,7 +92,7 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 				'campaign.title' => $post->post_title,
 				'campaign.author' => $author->data->display_name,
 				'campaign.link' => get_edit_post_link( $post->ID ),
-			)
+			),
 		);
 
 		$mail = bp_send_email( 'ad_campaign_approval', $admins, $args );
@@ -154,7 +154,7 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 			'post_content' => $message,
 			'post_excerpt' => $message,
 			'post_status' => 'publish',
-			'post_type' => bp_get_email_post_type()
+			'post_type' => bp_get_email_post_type(),
 		] );
 
 		if ( $post_id && ! is_wp_error( $post_id ) ) {
@@ -188,7 +188,7 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 			'post_content' => $message,
 			'post_excerpt' => $message,
 			'post_status' => 'publish',
-			'post_type' => bp_get_email_post_type()
+			'post_type' => bp_get_email_post_type(),
 		] );
 
 		if ( $post_id && ! is_wp_error( $post_id ) ) {
