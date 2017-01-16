@@ -12,15 +12,23 @@ use Lift\AdbutlerUserCampaigns\Integrations\Integration;
 use Lift\AdbutlerUserCampaigns\Interfaces\Plugin_Integration;
 use Lift\AdbutlerUserCampaigns\Interfaces\Provider;
 
-// Vendor
+// Vendor.
 use \AdButler\Advertiser;
 
+/**
+ * Class: Integration_Create_Advertiser
+ *
+ * @see Lift\AdbutlerUserCampaigns\Integrations\Integration
+ * @see Lift\AdbutlerUserCampaigns\Intefaces\Plugin_Integration
+ * @since  v.0.1.0
+ */
 class Integration_Create_Advertiser extends Integration implements Plugin_Integration {
 
 	/**
 	 * Constructor
 	 *
-	 * @param Hook_Catalog $hook_catalog The main Hook_Catalog instance
+	 * @param Hook_Catalog $hook_catalog The main Hook_Catalog instance.
+	 * @param Provider     ...$providers A variable array of providers.
 	 */
 	public function __construct( Hook_Catalog $hook_catalog, Provider ...$providers ) {
 		parent::__construct( $hook_catalog );
@@ -40,6 +48,7 @@ class Integration_Create_Advertiser extends Integration implements Plugin_Integr
 	public function must_create_advertiser_if_not_exists() {
 		$this->add_hook( 'save_post', 'create_advertiser_on_save_post', 10, 3 );
 		$this->add_hook( 'profile_update', 'create_advertiser_on_profile_update', 10, 2 );
+		return true;
 	}
 
 	/**
@@ -48,8 +57,8 @@ class Integration_Create_Advertiser extends Integration implements Plugin_Integr
 	 * @link https://developer.wordpress.org/reference/hooks/save_post/
 	 * @uses   Integration::_save_post_hook_should_cease_execution()
 	 * @since  v0.1.0
-	 * @param  int      $post_id \WP_Post::id
-	 * @param  \WP_Post $post    \WP_Post object
+	 * @param  int      $post_id \WP_Post::$ID.
+	 * @param  \WP_Post $post    \WP_Post object.
 	 * @param  bool     $update  True if this is a post being updated.
 	 * @return bool              True on success, false if no action taken.
 	 */
@@ -58,12 +67,12 @@ class Integration_Create_Advertiser extends Integration implements Plugin_Integr
 			return;
 		}
 
-		// Run a helper check to make sure we have all the right condition
+		// Run a helper check to make sure we have all the right condition.
 		if ( self::_save_post_hook_should_cease_execution( $post_id ) ) {
 			return false;
 		}
 
-		// The Author is the User we're going to ensure is an advertiser
+		// The Author is the User we're going to ensure is an advertiser.
 		$user_id = intval( $author );
 
 		// Check for advertiser ID, if it already exists, we're done here.
@@ -80,11 +89,11 @@ class Integration_Create_Advertiser extends Integration implements Plugin_Integr
 				$user_data->data->display_name,
 				$user_data->user_login,
 				$user_data->ID
-				);
+			);
 			$response = $this->create_advertiser( $descriptive_name, $user_data->user_email );
 			$data = $response->getData();
-		} catch( \Exception $e ) {
-			wp_die( $e->getMessage() );
+		} catch ( \Exception $e ) {
+			wp_die( esc_html( $e->getMessage() ) );
 		}
 
 		// If we haven't thrown, request was most likely successful, let's make sure and then update.
@@ -93,7 +102,7 @@ class Integration_Create_Advertiser extends Integration implements Plugin_Integr
 		}
 		$success = update_user_meta( $user_data->ID, 'adbutler_advertiser_id', intval( $data['id'] ) );
 
-		if( false === $success ) {
+		if ( false === $success ) {
 			wp_die( 'Could not save AdButler advertiser ID.  Please try again.' );
 		}
 
@@ -105,32 +114,31 @@ class Integration_Create_Advertiser extends Integration implements Plugin_Integr
 	 *
 	 * @link   https://developer.wordpress.org/reference/hooks/profile_update/
 	 * @since  v0.1.0
-	 * @param  int      $user_id      \WP_User:ID
-	 * @param  \WP_User $old_userdata \WP_User object
+	 * @param  int      $user_id      \WP_User:ID.
+	 * @param  \WP_User $old_userdata \WP_User object.
 	 * @return bool                   True if action taken, false otherwise
 	 */
 	public function create_advertiser_on_profile_update( $user_id, \WP_User $old_userdata ) {
-		// There are a variety of ways to grant permissions to users, we check caps, not role
+		// There are a variety of ways to grant permissions to users, we check caps, not role.
 		if ( ! \user_can( $user_id, 'edit_adbutler_creatives' ) ) {
 			return false;
 		}
 
 		// Now check if they have a advertiser id.
 		$advertiser_id = \get_user_meta( $user_id, 'adbutler_advertiser_id', true );
-		if( ! empty( $advertiser_id ) ) {
+		if ( ! empty( $advertiser_id ) ) {
 			return;
 		}
 
 		// Old userdata is irrelevant, we want the new user data.
 		$user_data = get_userdata( $user_id );
 
-
-		// Okay we need to create an Advertiser
+		// Okay we need to create an Advertiser.
 		try {
 			$response = $this->create_advertiser( $user_data->user_login, $user_data->user_email );
 			$data = $response->getData();
-		} catch( \Exception $e ) {
-			wp_die( $e->getMessage() );
+		} catch ( \Exception $e ) {
+			wp_die( esc_html( $e->getMessage() ) );
 		}
 
 		// If we haven't thrown, request was most likely successful, let's make sure and then update.
@@ -139,7 +147,7 @@ class Integration_Create_Advertiser extends Integration implements Plugin_Integr
 		}
 		$success = update_user_meta( $user_data->ID, 'adbutler_advertiser_id', intval( $data['id'] ) );
 
-		if( false === $success ) {
+		if ( false === $success ) {
 			wp_die( 'Could not save AdButler Advertiser ID.  Please try again.' );
 		}
 
@@ -153,8 +161,8 @@ class Integration_Create_Advertiser extends Integration implements Plugin_Integr
 	 *
 	 * @uses   \AdButler\Advertiser::create()
 	 * @since  v0.1.0
-	 * @param  string $username WordPress unique username
-	 * @param  string $email    WordPress unique email
+	 * @param  string $username WordPress unique username.
+	 * @param  string $email    WordPress unique email.
 	 * @return \Adbutler\Advertiser
 	 */
 	public function create_advertiser( $username, $email ) {
@@ -163,7 +171,7 @@ class Integration_Create_Advertiser extends Integration implements Plugin_Integr
 			'can_add_banners' => true,
 			'email' => esc_html( $email ),
 			'name' => esc_html( $username ),
-			'password' => wp_generate_password( 12 )
-			]);
+			'password' => wp_generate_password( 12 ),
+		]);
 	}
 }

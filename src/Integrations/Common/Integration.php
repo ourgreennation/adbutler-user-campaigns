@@ -45,10 +45,10 @@ abstract class Integration implements Plugin_Integration {
 		$added_integrations = array();
 
 		foreach( $integrations as $integration ) {
-			array_push( $added_integrations, $this->$integration() ? $this->$integration : false );
+			array_push( $added_integrations, $this->$integration() ? $this->$integration() : false );
 		}
 
-		return array_filter( $added_integrations );
+		return $this;
 	}
 
 	/**

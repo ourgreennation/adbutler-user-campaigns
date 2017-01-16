@@ -10,6 +10,9 @@ use \AdButler\API as Client;
 use Lift\AdbutlerUserCampaigns\Integrations\Hook_Catalog;
 use Lift\AdbutlerUserCampaigns\Providers\ACF_Creative_Meta;
 use Lift\AdbutlerUserCampaigns\Providers\Creative_Meta;
+use Lift\AdbutlerUserCampaigns\Providers\Authorize_Net_Payment_Provider;
+use Lift\AdbutlerUserCampaigns\Providers\Email_Provider;
+use Lift\AdbutlerUserCampaigns\Providers\BP_Email_Provider;
 
 /**
  * Class: Dependency Injector
@@ -60,6 +63,12 @@ class Dependency_Injector {
 		array_push( $this->required, 'creative_post_meta_provider' );
 		$this->dependencies['creative_post_meta_provider'] = $this->register_creative_meta_provider();
 
+		array_push( $this->required, 'payment_provider' );
+		$this->dependencies['payment_provider'] = $this->register_payment_provider();
+
+		array_push( $this->required, 'email_provider' );
+		$this->dependencies['email_provider'] = $this->register_email_provider();
+
 		return $this;
 	}
 
@@ -103,6 +112,29 @@ class Dependency_Injector {
 	}
 
 	/**
+	 * Registers a Payment Provider
+	 *
+	 * @since  v0.1.0
+	 * @return Payment_Provider Instance of Payment_Provider.
+	 */
+	public function register_payment_provider() {
+		return new Authorize_Net_Payment_Provider;
+	}
+
+	/**
+	 * Registers an Email Provider
+	 *
+	 * @since  v0.1.0
+	 * @return Email_Provider Instance of Email_Provider.
+	 */
+	public function register_email_provider() {
+		if ( class_exists( '\\BuddyPress' ) ) {
+			return new BP_Email_Provider;
+		}
+		return new Email_Provider;
+	}
+
+	/**
 	 * Inject
 	 *
 	 * @since  v0.1.0
@@ -138,7 +170,7 @@ class Dependency_Injector {
 	 */
 	public function ensure_dependencies() {
 		foreach( $this->required as $req_dep ) {
-			if( ! isset( $this->dependencies[$req_dep] ) || is_null( $this->dependencies[$req_dep ] ) ) {
+			if( ! isset( $this->dependencies[$req_dep] ) || is_null( $this->dependencies[$req_dep] ) ) {
 				return false;
 			}
 		}

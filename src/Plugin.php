@@ -7,12 +7,14 @@
 
 namespace Lift\AdbutlerUserCampaigns;
 
-// Integrations:
+// Integrations.
+use Lift\AdbutlerUserCampaigns\Integrations\Hook_Catalog;
 use Lift\AdbutlerUserCampaigns\Interfaces\Plugin_Integration;
 
-// Helpers
+// Helpers.
 use Lift\AdbutlerUserCampaigns\Helpers\Capability_Utils;
 use Lift\AdbutlerUserCampaigns\Helpers\Post_Type_Utils;
+use Lift\AdbutlerUserCampaigns\Providers\BP_Email_Provider;
 
 /**
  * Class: Plugin
@@ -22,44 +24,50 @@ use Lift\AdbutlerUserCampaigns\Helpers\Post_Type_Utils;
  * @since  v.0.1.0
  */
 final class Plugin {
-	// Adds utilities to grant capabilities to roles
+	// Adds utilities to grant capabilities to .
 	use Capability_Utils;
 
-	// Adds helper functions to register new post types
+	// Adds helper functions to register new post types.
 	use Post_Type_Utils;
 
 	/**
 	 * Path the root plugin directory
+	 *
 	 * @var string
 	 */
 	public static $plugin_dir;
 
 	/**
 	 * Plugin version
+	 *
 	 * @var string SEMVER version
 	 */
 	public static $plugin_version;
 
 	/**
 	 * Path the application root directory
+	 *
 	 * @var string
 	 */
 	public static $app_dir;
 
 	/**
 	 * Dependency Injector
+	 *
 	 * @var Dependency_Injector
 	 */
 	public $injector;
 
 	/**
 	 * Integrations
+	 *
 	 * @var Plugin_Integration[] Array of Plugin_Integrations
 	 */
 	protected $integrations;
 
 	/**
 	 * Post Types
+	 *
 	 * @var \WP_Post_Type[] An array of \WP_Post_Type objects
 	 */
 	protected $post_types = array();
@@ -67,6 +75,7 @@ final class Plugin {
 	/**
 	 * Constructor
 	 *
+	 * @param  Dependency_Injector $injector An instance of Dependency_Injector.
 	 * @since  v0.1.0
 	 * @return  Plugin Instance of self
 	 */
@@ -118,10 +127,10 @@ final class Plugin {
 	 * @return Plugin Instance of self
 	 */
 	public function run_now() {
-		// Meta Boxes
-		if( false ) {
+		// Meta Boxes.
+		if ( false ) {
 			$provider = $this->injector->inject( 'creative_post_meta_provider' );
-			add_action( 'init', array( $provider , 'do_post_meta_box' ) );
+			add_action( 'init', array( $provider, 'do_post_meta_box' ) );
 		}
 		return $this;
 	}
@@ -146,7 +155,7 @@ final class Plugin {
 	 * @return Plugin Instance of self
 	 */
 	public function register_actions() {
-		// Post Types
+		// Post Types.
 		add_action( 'init', array( $this, 'register_post_types' ) );
 
 		return $this;
@@ -185,21 +194,22 @@ final class Plugin {
 	 * @since  v0.1.0
 	 * @return Plugin  Instance of self
 	 */
-	final protected function register_adbutler_creative_post_type() {
-		// Arguments specific to this post type
+	protected function register_adbutler_creative_post_type() {
+		// Arguments specific to this post type.
 		$args = array(
 			'description' => 'Adbutler Campaigns',
 			'menu_position' => 20,
+			'menu_icon' => 'dashicons-megaphone',
 			'exclude_from_search' => true,
 			'capabilities' => self::get_capabilities(),
-			'supports' => [ 'title' ],
-			'taxonomies' => []
+			'supports' => [ 'title', 'author' ],
+			'taxonomies' => [],
 			);
 
-		// Fill arguments and labels
+		// Fill arguments and labels.
 		$filled_args = $this->fill_post_type_args( $args, 'Ad Campaign', 'Ad Campaigns' );
 
-		// Store reference to the create post type
+		// Store reference to the create post type.
 		array_push( $this->post_types, register_post_type( 'adbutler_campaign', $filled_args ) );
 
 		return $this;
@@ -215,14 +225,14 @@ final class Plugin {
 	 * @return array An array of capabilites where key is mapping and value is capability
 	 */
 	public static function get_capabilities() {
-		return array (
+		return array(
 			'edit_post' => 'edit_adbutler_campaign',
 			'read_post' => 'read_adbutler_campaign',
 			'delete_post' => 'delete_adbutler_campaign',
 			'edit_posts' => 'edit_adbutler_campaigns',
 			'edit_others_posts' => 'edit_others_adbutler_campaigns',
 			'publish_posts' => 'publish_adbutler_campaigns',
-			'read_private_posts' => 'read_private_adbutler_campaigns'
+			'read_private_posts' => 'read_private_adbutler_campaigns',
 			);
 	}
 
@@ -234,8 +244,9 @@ final class Plugin {
 	 * @since  v0.1.0
 	 * @return void
 	 */
-	public final static function activate() {
+	public static function activate() {
 		self::_activate_capabilities();
+		self::_buddypress_emails();
 	}
 
 	/**
@@ -246,7 +257,7 @@ final class Plugin {
 	 * @since  v0.1.0
 	 * @return void
 	 */
-	public final static function deactivate() {
+	public static function deactivate() {
 		self::_deactivate_capabilities();
 	}
 
@@ -264,18 +275,23 @@ final class Plugin {
 	 */
 	protected static function _activate_capabilities() {
 		$caps = array_values( self::get_capabilities() );
-		// Grant some capabilities to admins and editors
+		// Grant some capabilities to admins and editors.
 		$roles = [ 'administrator', 'editor' ];
 		foreach ( $roles as $role ) {
 			self::grant_capabilities( get_role( $role ), $caps );
 		}
 
 		// Just contributors this time, as they get a few less, listed below.
-		self::grant_capabilities( get_role( 'contributor' ), array_diff( $caps, array(
-			'edit_others_adbutler_creatives',
-			'publish_adbutler_creatives',
-			'read_private_adbutler_creatives'
-			) ) );
+		self::grant_capabilities( get_role( 'contributor' ), $limited_caps = array_diff( $caps, array(
+			'edit_others_adbutler_campaigns',
+			'publish_adbutler_campaigns',
+			'read_private_adbutler_campaigns',
+		) ) );
+
+		// Grant Cababiliites to other roles as well.
+		foreach ( apply_filters( 'adbutler_cc_additional_roles', [] ) as $role ) {
+			self::grant_capabilities( get_role( $role ), $limited_caps );
+		}
 	}
 
 	/**
@@ -291,8 +307,29 @@ final class Plugin {
 	 * @return void
 	 */
 	protected static function _deactivate_capabilities() {
-		foreach( [ 'administrator', 'editor', 'contributor' ] as $role ) {
+		$roles = array_merge( apply_filters( 'adbutler_cc_additional_roles', [] ), [
+			'administrator',
+			'editor',
+			'contributor',
+		] );
+		foreach ( $roles as $role ) {
 			self::ungrant_capabilities( get_role( $role ), array_values( self::get_capabilities() ) );
+		}
+	}
+
+	/**
+	 * Setup Buddy Press Custom Emails
+	 *
+	 * If BuddyPress is installed and running, upon activation this function will setup
+	 * our custom emails.
+	 *
+	 * @uses Lift\AdbutlerUserCampaigns\Providers\BP_Email_Provider::activate();
+	 * @return void
+	 */
+	protected static function _buddypress_emails() {
+		if ( class_exists( '\\BuddyPress' ) ) {
+			$provider = new BP_Email_Provider;
+			$provider->activate();
 		}
 	}
 }
