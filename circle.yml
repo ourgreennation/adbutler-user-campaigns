@@ -9,9 +9,5 @@ dependencies:
 
 test:
   override:
-    # This is just for us to see that the plugin was actually installed and is active
-    - ./wp-cli.phar plugin list --path=wordpress
     - phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
-    - phpunit
-
 
