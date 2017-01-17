@@ -15,7 +15,7 @@ test:
     - mkdir ~/deploy
     - cp ./adbutler-user-campaigns.php ~/deploy
     - cp ./composer.json ~/deploy
-    - cp ./composer.locl ~/deploy
+    - cp ./composer.lock ~/deploy
     - cp ./README.md ~/deploy
     - cp -R ./src ~/deploy/src
     - cp -R ./scripts ~/deploy/scripts
