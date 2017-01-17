@@ -1,4 +1,4 @@
-[![LiftUX| A Digital Product Agency](http://lift.d.pr/vbtX/Lwc8wZKc.jpg)](https://liftux.com)
+[![LiftUX| A Digital Product Agency](http://lift.d.pr/j5MX/3XnSNyyf.jpg)](https://liftux.com)
 
 # AdButler User Campaigns
 
