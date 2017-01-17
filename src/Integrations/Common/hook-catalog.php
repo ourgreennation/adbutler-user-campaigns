@@ -65,7 +65,7 @@ class Hook_Catalog {
 	 * @param  callable $callable The callable function/method hooked to the tag.
 	 * @return Hook_Definition[]   An array of the stored HookDefinitions
 	 */
-	public function remove_entry( string $tag, callable $callable ) {
+	public function remove_entry( $tag, $callable ) {
 		return $this->entries = array_filter(
 			$this->entries,
 			function ( Hook_Definition $entry ) use ( $tag, $callable ) {
