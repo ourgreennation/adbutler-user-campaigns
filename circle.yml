@@ -7,6 +7,8 @@ dependencies:
     - composer global require wp-coding-standards/wpcs
     - phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
     - phpcs -i
+  override:
+    - composer update --no-dev --no-interaction
 test:
   override:
     - phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
