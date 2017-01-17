@@ -13,13 +13,13 @@ test:
   post:
     - composer update --no-dev --no-interaction
     - mkdir ~/deploy
-    - cp ~/adbutler-user-campaigns.php ~/deploy
-    - cp ~/composer.json ~/deploy
-    - cp ~/composer.locl ~/deploy
-    - cp ~/README.md ~/deploy
-    - cp -R ~/src ~/deploy/src
-    - cp -R ~/scripts ~/deploy/scripts
-    - cp -R ~/vendor ~/deploy/vendor
+    - cp ./adbutler-user-campaigns.php ~/deploy
+    - cp ./composer.json ~/deploy
+    - cp ./composer.locl ~/deploy
+    - cp ./README.md ~/deploy
+    - cp -R ./src ~/deploy/src
+    - cp -R ./scripts ~/deploy/scripts
+    - cp -R ./vendor ~/deploy/vendor
 
 deployment:
   deploy:
