@@ -39,41 +39,39 @@ add_action( 'adbutler_cc_additional_roles', function() {
 	return [ 'ogn_contributor' ];
 });
 
-// Register Activation Hook
+// Register Activation Hook.
 register_activation_hook( __FILE__, array( __NAMESPACE__ . '\\Plugin', 'activate' ) );
 
-// Register DeActivation Hook
+// Register DeActivation Hook.
 register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\\Plugin', 'deactivate' ) );
 
 /**
  * AdButler User Campaigns
  *
- * Sets up the plugin and all the associated functionality
+ * Sets up the plugin and all the associated functionality.
  *
  * @return bool|Plugin An instance of the main plugin class, false if dependencies aren't met
  */
 function adbutler_user_campaigns() {
-	// Get a new Dependency_Injector
+	// Get a new Dependency_Injector.
 	$injector = new Dependency_Injector;
 	$injector->setup();
 
-	// Allow other plugins and the theme to access the Dependency Injector
+	// Allow other plugins and the theme to access the Dependency Injector.
 	$injector = apply_filters( 'adbutler_cc_dependency_injector', $injector );
 
-	// Ensure we have all dependencies
+	// Ensure we have all dependencies.
 	if ( ! $injector->ensure_dependencies() ) {
-		echo '<pre>';
-		var_dump( $injector );
 		return false;
 	}
 
 	// Declare a Global Instance of Plugin because WordPress uses Globals everywhere.
 	global $adbutler_cc;
 
-	// Instantiate a new instance of the Plugin
+	// Instantiate a new instance of the Plugin.
 	$adbutler_cc = new Plugin( $injector );
 
-	// Setup Plugin and Define All Integrations
+	// Setup Plugin and Define All Integrations.
 	$adbutler_cc->setup()
 		->register_integration(
 			new Integration_Create_Advertiser(

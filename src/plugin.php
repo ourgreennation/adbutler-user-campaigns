@@ -128,7 +128,7 @@ final class Plugin {
 	 */
 	public function run_now() {
 		// Meta Boxes.
-		if ( false ) {
+		if ( apply_filters( 'adbutler-cc\build_acf_fields_with_function', false ) ) {
 			$provider = $this->injector->inject( 'creative_post_meta_provider' );
 			add_action( 'init', array( $provider, 'do_post_meta_box' ) );
 		}
@@ -207,12 +207,54 @@ final class Plugin {
 			);
 
 		// Fill arguments and labels.
-		$filled_args = $this->fill_post_type_args( $args, 'Ad Campaign', 'Ad Campaigns' );
+		$filled_args = $this->fill_post_type_args_labels( $this->fill_post_type_args( $args ) );
 
 		// Store reference to the create post type.
 		array_push( $this->post_types, register_post_type( 'adbutler_campaign', $filled_args ) );
 
 		return $this;
+	}
+
+	/**
+	 * Fill Post Type Args Labels
+	 *
+	 * @since  v0.1.0
+	 * @param  array $args An array of post type arguments.
+	 * @return array       An array of post type arguments with labels
+	 */
+	protected function fill_post_type_args_labels( $args ) {
+		$args['label'] = 'Ad Campaign';
+		$args['labels'] = array(
+			'name'                  => _x( 'Ad Campaigns', 'Post Type General Name', 'adbutler-cc-i18n' ),
+			'singular_name'         => _x( 'Ad Campaign', 'Post Type Singular Name', 'adbutler-cc-i18n' ),
+			'menu_name'             => __( 'Ad Campaigns', 'adbutler-cc-i18n' ),
+			'name_admin_bar'        => __( 'Ad Campaign', 'adbutler-cc-i18n' ),
+			'archives'              => __( 'Ad Campaign Archives', 'adbutler-cc-i18n' ),
+			'attributes'            => __( 'Ad Campaign Attributes', 'adbutler-cc-i18n' ),
+			'parent_item_colon'     => __( 'Ad Campaign Parent Item:', 'adbutler-cc-i18n' ),
+			'all_items'             => __( 'All Ad Campaigns', 'adbutler-cc-i18n' ),
+			'add_new_item'          => __( 'Add New Ad Campaign', 'adbutler-cc-i18n' ),
+			'add_new'               => __( 'Add New', 'adbutler-cc-i18n' ),
+			'new_item'              => __( 'New Ad Campaign', 'adbutler-cc-i18n' ),
+			'edit_item'             => __( 'Edit Ad Campaign', 'adbutler-cc-i18n' ),
+			'update_item'           => __( 'Update Ad Campaign', 'adbutler-cc-i18n' ),
+			'view_item'             => __( 'View Ad Campaign', 'adbutler-cc-i18n' ),
+			'view_items'            => __( 'View Ad Campaigns', 'adbutler-cc-i18n' ),
+			'search_items'          => __( 'Search Ad Campaign', 'adbutler-cc-i18n' ),
+			'not_found'             => __( 'Not found', 'adbutler-cc-i18n' ),
+			'not_found_in_trash'    => __( 'Not found in Trash', 'adbutler-cc-i18n' ),
+			'featured_image'        => __( 'Featured Image', 'adbutler-cc-i18n' ),
+			'set_featured_image'    => __( 'Set featured image', 'adbutler-cc-i18n' ),
+			'remove_featured_image' => __( 'Remove featured image', 'adbutler-cc-i18n' ),
+			'use_featured_image'    => __( 'Use as featured image', 'adbutler-cc-i18n' ),
+			'insert_into_item'      => __( 'Insert into item', 'adbutler-cc-i18n' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this Ad Campaign', 'adbutler-cc-i18n' ),
+			'items_list'            => __( 'Ad Campaigns list', 'adbutler-cc-i18n' ),
+			'items_list_navigation' => __( 'Ad Campaigns list navigation', 'adbutler-cc-i18n' ),
+			'filter_items_list'     => __( 'Filter Ad Campaigns list', 'adbutler-cc-i18n' ),
+			);
+
+		return $args;
 	}
 
 	/**
