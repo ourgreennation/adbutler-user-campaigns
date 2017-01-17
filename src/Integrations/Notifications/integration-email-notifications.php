@@ -62,7 +62,7 @@ class Integration_Email_Notifications extends Integration implements Plugin_Inte
 	 * @return bool True if admin should be notified, false otherwise
 	 */
 	public function maybe_notify_site_admin_of_pending_campaign() {
-		if ( apply_filters( 'adbutler_cc\maybe_notify_site_admin_of_pending_campaign', true ) ) {
+		if ( apply_filters( 'adbutler_cc_maybe_notify_site_admin_of_pending_campaign', true ) ) {
 			$this->add_hook( 'transition_post_status', 'notify_site_admin', 10, 3 );
 			return true;
 		}
@@ -76,7 +76,7 @@ class Integration_Email_Notifications extends Integration implements Plugin_Inte
 	 * @return bool True if author should be notified of approval, false otherwise.
 	 */
 	public function maybe_notify_campaign_author_of_approval() {
-		if ( apply_filters( 'adbutler_cc\maybe_notify_campaign_author_of_approval', true ) ) {
+		if ( apply_filters( 'adbutler_cc_maybe_notify_campaign_author_of_approval', true ) ) {
 			$this->add_hook( 'transition_post_status', 'notify_campaign_author', 10, 3 );
 			return true;
 		}

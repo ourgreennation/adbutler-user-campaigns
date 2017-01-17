@@ -47,7 +47,7 @@ class Email_Provider implements Provider {
 			return false;
 		}
 
-		$admins = apply_filters( 'adbutler\admin_notification_list', [ get_option( 'admin_email' ) ] );
+		$admins = apply_filters( 'adbutler_cc_admin_notification_list', [ get_option( 'admin_email' ) ] );
 		$subject = sprintf( '%s Has Submitted an Ad Campaign for your Review', $author->data->display_name );
 		$message = sprintf( 'Click here to review: %s.', get_edit_post_link( $post->ID, '' ) );
 

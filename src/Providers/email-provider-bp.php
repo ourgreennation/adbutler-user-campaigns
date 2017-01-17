@@ -51,7 +51,7 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 			return false;
 		}
 
-		$admins = apply_filters( 'adbutler\admin_notification_list', [ get_option( 'admin_email' ) ] );
+		$admins = apply_filters( 'adbutler_cc_admin_notification_list', [ get_option( 'admin_email' ) ] );
 		$args = array(
 			'tokens' => array(
 				'site.name' => get_bloginfo( 'name' ),
@@ -85,7 +85,7 @@ class BP_Email_Provider extends Email_Provider implements Provider {
 			return false;
 		}
 
-		$admins = apply_filters( 'adbutler\admin_notification_list', [ get_option( 'admin_email' ) ] );
+		$admins = apply_filters( 'adbutler_cc_admin_notification_list', [ get_option( 'admin_email' ) ] );
 		$args = array(
 			'tokens' => array(
 				'site.name' => get_bloginfo( 'name' ),

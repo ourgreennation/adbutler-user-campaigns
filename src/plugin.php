@@ -128,7 +128,7 @@ final class Plugin {
 	 */
 	public function run_now() {
 		// Meta Boxes.
-		if ( apply_filters( 'adbutler-cc\build_acf_fields_with_function', false ) ) {
+		if ( apply_filters( 'adbutler_cc_build_acf_fields_with_function', false ) ) {
 			$provider = $this->injector->inject( 'creative_post_meta_provider' );
 			add_action( 'init', array( $provider, 'do_post_meta_box' ) );
 		}
