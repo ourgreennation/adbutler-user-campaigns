@@ -5,7 +5,7 @@ machine:
 dependencies:
   pre:
     - composer global require wp-coding-standards/wpcs
-    - phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/phpcs
+    - phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
     - phpcs -i
 test:
   override:
