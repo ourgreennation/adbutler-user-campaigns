@@ -13,6 +13,10 @@
       {
         "type": "vcs",
         "url": "https://github.com/adbutler/adbutler-php"
+      },
+      {
+        "type": "vcs",
+        "url": "git@github.com:liftux/plugins-core.git"
       }
     ],
     "require-dev": {
@@ -20,6 +24,7 @@
       "phpdocumentor/phpdocumentor": "2.*"
     },
     "require": {
+      "liftux/plugins-core": "dev-master",
       "adbutler/adbutler-php": "dev-master"
     },
     "autoload" : {

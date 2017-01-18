@@ -8,8 +8,8 @@
 namespace Lift\AdbutlerUserCampaigns;
 
 // Integrations.
-use Lift\AdbutlerUserCampaigns\Integrations\Hook_Catalog;
-use Lift\AdbutlerUserCampaigns\Interfaces\Plugin_Integration;
+use Lift\Core\Hook_Catalog;
+use Lift\Core\Interfaces\Integration;
 
 // Helpers.
 use Lift\AdbutlerUserCampaigns\Helpers\Capability_Utils;
@@ -61,7 +61,7 @@ final class Plugin {
 	/**
 	 * Integrations
 	 *
-	 * @var Plugin_Integration[] Array of Plugin_Integrations
+	 * @var Integration[] Array of Integrations
 	 */
 	protected $integrations;
 
@@ -139,10 +139,10 @@ final class Plugin {
 	 * Register Integration
 	 *
 	 * @since  v0.1.0
-	 * @param  Plugin_Integration $integration A discreet integration with another part of WP.
+	 * @param  Integration $integration A discreet integration with another part of WP.
 	 * @return Plugin                          Instance of self
 	 */
-	public function register_integration( Plugin_Integration $integration ) {
+	public function register_integration( Integration $integration ) {
 		array_push( $this->integrations, $integration->add_all_hooks() );
 
 		return $this;

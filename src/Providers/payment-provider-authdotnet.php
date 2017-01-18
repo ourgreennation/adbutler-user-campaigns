@@ -8,7 +8,7 @@
  */
 
 namespace Lift\AdbutlerUserCampaigns\Providers;
-use Lift\AdbutlerUserCampaigns\Interfaces\Provider;
+use Lift\Core\Interfaces\Provider;
 
 /**
  * Class: Authorize_Net_Payment_Provider

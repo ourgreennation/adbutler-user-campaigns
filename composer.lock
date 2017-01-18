@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f0a9742e23185ee90d2d0e620c7caa65",
-    "content-hash": "6f691b3336ff5e9806c75e886e8e81df",
+    "hash": "fb2394afc1eab497e7cae5a08269077c",
+    "content-hash": "62e7b491570e80ceb689416301072e03",
     "packages": [
         {
             "name": "adbutler/adbutler-php",
@@ -63,6 +63,39 @@
                 "issues": "https://github.com/adbutler/adbutler-php/issues"
             },
             "time": "2017-01-11 20:37:10"
+        },
+        {
+            "name": "liftux/plugins-core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:LiftUX/plugins-core.git",
+                "reference": "88f331164206bb1a39eaf83edeeed432e2a68a6f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LiftUX/plugins-core/zipball/88f331164206bb1a39eaf83edeeed432e2a68a6f",
+                "reference": "88f331164206bb1a39eaf83edeeed432e2a68a6f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "LiftUX and Contributors",
+                    "homepage": "https://github.com/liftux/plugins-core/graphs/contributors"
+                }
+            ],
+            "description": "A PHP library of classes and interfaces used in the composition of WordPress plugins authored by Lift",
+            "support": {
+                "source": "https://github.com/LiftUX/plugins-core/tree/master",
+                "issues": "https://github.com/LiftUX/plugins-core/issues"
+            },
+            "time": "2017-01-18 22:08:42"
         }
     ],
     "packages-dev": [
@@ -3750,6 +3783,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "liftux/plugins-core": 20,
         "adbutler/adbutler-php": 20
     },
     "prefer-stable": false,

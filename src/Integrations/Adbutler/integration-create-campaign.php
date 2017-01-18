@@ -7,10 +7,10 @@
  */
 
 namespace Lift\AdbutlerUserCampaigns\Integrations\Adbutler;
-use Lift\AdbutlerUserCampaigns\Integrations\Hook_Catalog;
-use Lift\AdbutlerUserCampaigns\Integrations\Integration;
-use Lift\AdbutlerUserCampaigns\Interfaces\Plugin_Integration;
-use Lift\AdbutlerUserCampaigns\Interfaces\Provider;
+use Lift\Core\Hook_Catalog;
+use Lift\Core\Base_Integration;
+use Lift\Core\Interfaces\Integration;
+use Lift\Core\Interfaces\Provider;
 
 
 // Vendor.
@@ -21,7 +21,7 @@ use \AdButler\BannerCampaign;
  *
  * @since  v0.1.0
  */
-class Integration_Create_Campaign extends Integration implements Plugin_Integration {
+class Integration_Create_Campaign extends Base_Integration implements Integration {
 
 	/**
 	 * Constructor

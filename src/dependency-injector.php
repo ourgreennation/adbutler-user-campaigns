@@ -6,8 +6,9 @@
  */
 
 namespace Lift\AdbutlerUserCampaigns;
+use Lift\Core\Dependency_Injector as DI;
 use \AdButler\API as Client;
-use Lift\AdbutlerUserCampaigns\Integrations\Hook_Catalog;
+use Lift\Core\Hook_Catalog;
 use Lift\AdbutlerUserCampaigns\Providers\ACF_Creative_Meta;
 use Lift\AdbutlerUserCampaigns\Providers\Creative_Meta;
 use Lift\AdbutlerUserCampaigns\Providers\Authorize_Net_Payment_Provider;
@@ -19,33 +20,7 @@ use Lift\AdbutlerUserCampaigns\Providers\BP_Email_Provider;
  *
  * @since  v0.1.0
  */
-class Dependency_Injector {
-	/**
-	 * Required Dependencies
-	 *
-	 * @var string[]
-	 */
-	protected $required;
-
-	/**
-	 * Dependencies Registered to the Injector
-	 *
-	 * @var mixed[]
-	 */
-	protected $dependencies;
-
-	/**
-	 * Constructor
-	 *
-	 * @return  Dependency_Injector Instance of self
-	 */
-	public function __construct() {
-		$this->dependencies = array();
-		$this->required = array();
-
-		return $this;
-	}
-
+class Dependency_Injector extends DI {
 	/**
 	 * Setup
 	 *
@@ -134,48 +109,5 @@ class Dependency_Injector {
 			return new BP_Email_Provider;
 		}
 		return new Email_Provider;
-	}
-
-	/**
-	 * Inject
-	 *
-	 * @since  v0.1.0
-	 * @param  string $reference  Dependency Reference.
-	 * @return mixed|null             The dependency
-	 */
-	public function inject( $reference ) {
-		if ( array_key_exists( $reference, $this->dependencies ) ) {
-			return $this->dependencies[ $reference ];
-		}
-		return null;
-	}
-
-	/**
-	 * Register Dependency
-	 *
-	 * @since  v0.1.0
-	 * @param  string $reference   String to reference the dependency by.
-	 * @param  mixed  $dependency  The class to register.
-	 * @return Dependency_Injector Instance of self
-	 */
-	public function register_dependency( $reference, $dependency ) {
-		$this->dependency[ $reference ] = $dependency;
-
-		return $this;
-	}
-
-	/**
-	 * Ensure Dependency
-	 *
-	 * @since  v0.1.0
-	 * @return bool True if all required dependencies can be resolved, false otherwise.
-	 */
-	public function ensure_dependencies() {
-		foreach ( $this->required as $req_dep ) {
-			if ( ! isset( $this->dependencies[ $req_dep ] ) || is_null( $this->dependencies[ $req_dep ] ) ) {
-				return false;
-			}
-		}
-		return true;
 	}
 }

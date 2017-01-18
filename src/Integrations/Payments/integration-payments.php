@@ -7,10 +7,10 @@
  */
 
 namespace Lift\AdbutlerUserCampaigns\Integrations\Payments;
-use Lift\AdbutlerUserCampaigns\Integrations\Hook_Catalog;
-use Lift\AdbutlerUserCampaigns\Integrations\Integration;
-use Lift\AdbutlerUserCampaigns\Interfaces\Plugin_Integration;
-use Lift\AdbutlerUserCampaigns\Interfaces\Provider;
+use Lift\Core\Hook_Catalog;
+use Lift\Core\Base_Integration;
+use Lift\Core\Interfaces\Integration;
+use Lift\Core\Interfaces\Provider;
 use Lift\AdbutlerUserCampaigns\Providers\Payment_Provider;
 
 /**
@@ -18,11 +18,11 @@ use Lift\AdbutlerUserCampaigns\Providers\Payment_Provider;
  *
  * @uses Lift\AdbutlerUserCampaigns\Integrations\Hook_Catalog;
  * @uses Lift\AdbutlerUserCampaigns\Integrations\Integration;
- * @uses Lift\AdbutlerUserCampaigns\Interfaces\Plugin_Integration;
+ * @uses Lift\AdbutlerUserCampaigns\Interfaces\Integration;
  * @uses Lift\AdbutlerUserCampaigns\Interfaces\Provider;
  * @since v0.1.0
  */
-class Integration_Payments extends Integration implements Plugin_Integration {
+class Integration_Payments extends Base_Integration implements Integration {
 
 	/**
 	 * Hook Catalog

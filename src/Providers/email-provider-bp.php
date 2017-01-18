@@ -8,8 +8,8 @@
  */
 
 namespace Lift\AdbutlerUserCampaigns\Providers;
-use Lift\AdbutlerUserCampaigns\Interfaces\Provider;
-use Lift\AdbutlerUserCampaigns\Integrations\Hook_Catalog;
+use Lift\Core\Interfaces\Provider;
+use Lift\Core\Hook_Catalog;
 use Lift\AdbutlerUserCampaigns\Integrations\Hook_Definition;
 
 /**
