@@ -102,6 +102,11 @@ class Integration_Payments extends Base_Integration implements Integration {
 	 */
 	public function ask_for_payment_if_pending() {
 		global $post;
+
+		if ( 'adbutler_campaign' !== $post->post_type || 'pending' !== $post->post_status ) {
+			return;
+		}
+
 		$heading = __( 'Payment', 'adbutler-cc' );
 		$message = __( 'If you have not already completed payment, you must do so, as your creatives will not be approved until payment is confirmed.  Click on the link below and you will be taken to a secure payment page.', 'adbutler-cc' );
 		$button_text = __( 'Continue to Payment', 'adbutler-cc' );
