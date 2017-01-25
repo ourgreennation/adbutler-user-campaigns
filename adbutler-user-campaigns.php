@@ -17,6 +17,7 @@ namespace Lift\AdbutlerUserCampaigns;
 use Lift\AdbutlerUserCampaigns\Integrations\Adbutler\Integration_Create_Advertiser;
 use Lift\AdbutlerUserCampaigns\Integrations\Adbutler\Integration_Create_Campaign;
 use Lift\AdbutlerUserCampaigns\Integrations\Adbutler\Integration_Create_Banner;
+use Lift\AdbutlerUserCampaigns\Integrations\Settings\Integration_Settings;
 use Lift\AdbutlerUserCampaigns\Integrations\Payments\Integration_Payments;
 use Lift\AdbutlerUserCampaigns\Integrations\Notifications\Integration_Email_Notifications;
 
@@ -99,6 +100,12 @@ function adbutler_user_campaigns() {
 			new Integration_Email_Notifications(
 				$adbutler_cc->injector->inject( 'hook_catalog' ),
 				$adbutler_cc->injector->inject( 'email_provider' )
+			)
+		)
+		->register_integration(
+			new Integration_Settings(
+				$adbutler_cc->injector->inject( 'hook_catalog' ),
+				$adbutler_cc->injector->inject( 'options_provider' )
 			)
 		);
 

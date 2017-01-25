@@ -7,13 +7,14 @@
 
 namespace Lift\AdbutlerUserCampaigns;
 use Lift\Core\Dependency_Injector as DI;
-use \AdButler\API as Client;
 use Lift\Core\Hook_Catalog;
 use Lift\AdbutlerUserCampaigns\Providers\ACF_Creative_Meta;
 use Lift\AdbutlerUserCampaigns\Providers\Creative_Meta;
 use Lift\AdbutlerUserCampaigns\Providers\Authorize_Net_Payment_Provider;
 use Lift\AdbutlerUserCampaigns\Providers\Email_Provider;
 use Lift\AdbutlerUserCampaigns\Providers\BP_Email_Provider;
+use Lift\AdbutlerUserCampaigns\Providers\Options_Provider;
+use Lift\AdbutlerUserCampaigns\Services\Client;
 
 /**
  * Class: Dependency Injector
@@ -31,6 +32,9 @@ class Dependency_Injector extends DI {
 	 * @return Dependency_Injector Instance of self
 	 */
 	public function setup() {
+		array_push( $this->required, 'options_provider' );
+		$this->dependencies['options_provider'] = $this->register_options_provider();
+
 		array_push( $this->required, 'adbutler_client' );
 		$this->dependencies['adbutler_client'] = $this->register_adbutler_client();
 
@@ -56,13 +60,8 @@ class Dependency_Injector extends DI {
 	 * @return Client AdButler Client
 	 */
 	public function register_adbutler_client() {
-		$key = get_option( 'adbutler_client_api_key' );
-		$key = 'fe03c61d65e5b0a4ccf5f2f417c965e9';
-		if ( ! $key ) {
-			return null;
-		}
-		$client = new Client;
-		$client->init( [ 'api_key' => $key ] );
+		$client = new Client( $this->inject( 'options_provider' ) );
+		$client->call_static( 'init', array( 'api_key' => $client->options_provider->provide( 'api_key' ) ) );
 		return $client;
 	}
 
@@ -109,5 +108,15 @@ class Dependency_Injector extends DI {
 			return new BP_Email_Provider;
 		}
 		return new Email_Provider;
+	}
+
+	/**
+	 * Register an Options Provider
+	 *
+	 * @since  v0.1.0
+	 * @return Options_Provider Instance of Options_Provider
+	 */
+	public function register_options_provider() {
+		return new Options_Provider;
 	}
 }
