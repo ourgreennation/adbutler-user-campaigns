@@ -27,4 +27,4 @@ deployment:
   deploy:
     branch: master
     commands:
-      - rsync -avz -e 'ssh -p 18765' --progress ~/deploy/ leyan503@77.104.152.91:/home/leyan503/public_html/wp-content/plugins/adbutler-user-campaigns
+      - rsync -avz -e 'ssh -p 18765' --progress ~/deploy/ leyan503@77.104.152.91:/home/leyan503/public_html/wp-content/plugins/adbutler-user-campaigns --delete
