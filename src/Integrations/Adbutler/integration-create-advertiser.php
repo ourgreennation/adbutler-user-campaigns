@@ -106,7 +106,7 @@ class Integration_Create_Advertiser extends Base_Integration implements Integrat
 			wp_die( 'Could not save AdButler advertiser ID.  Please try again.' );
 		}
 
-		return  ( ! ( false === $success ) );
+		return ( ! ( false === $success ) );
 	}
 
 	/**
