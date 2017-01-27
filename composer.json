@@ -24,7 +24,7 @@
       "phpdocumentor/phpdocumentor": "2.*"
     },
     "require": {
-      "liftux/plugins-core": "dev-master",
+      "liftux/liftux-core": "dev-master",
       "adbutler/adbutler-php": "dev-master"
     },
     "autoload" : {

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fb2394afc1eab497e7cae5a08269077c",
-    "content-hash": "62e7b491570e80ceb689416301072e03",
+    "hash": "0197c038c74fd1144343ee6088943fad",
+    "content-hash": "d80da2f9aeb2cb06f0c0dfc28bd4cbcb",
     "packages": [
         {
             "name": "adbutler/adbutler-php",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/adbutler/adbutler-php.git",
-                "reference": "47669ad48804805b2516a873b1892c318c6b9186"
+                "reference": "c1cd9fdef1140d05e3fdc049aa354a35b8c314a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/adbutler/adbutler-php/zipball/47669ad48804805b2516a873b1892c318c6b9186",
-                "reference": "47669ad48804805b2516a873b1892c318c6b9186",
+                "url": "https://api.github.com/repos/adbutler/adbutler-php/zipball/c1cd9fdef1140d05e3fdc049aa354a35b8c314a8",
+                "reference": "c1cd9fdef1140d05e3fdc049aa354a35b8c314a8",
                 "shasum": ""
             },
             "require": {
@@ -62,23 +62,134 @@
                 "source": "https://github.com/adbutler/adbutler-php/tree/master",
                 "issues": "https://github.com/adbutler/adbutler-php/issues"
             },
-            "time": "2017-01-11 20:37:10"
+            "time": "2017-01-24 23:25:13"
         },
         {
-            "name": "liftux/plugins-core",
-            "version": "dev-master",
+            "name": "composer/installers",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:LiftUX/plugins-core.git",
-                "reference": "88f331164206bb1a39eaf83edeeed432e2a68a6f"
+                "url": "https://github.com/composer/installers.git",
+                "reference": "d78064c68299743e0161004f2de3a0204e33b804"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LiftUX/plugins-core/zipball/88f331164206bb1a39eaf83edeeed432e2a68a6f",
-                "reference": "88f331164206bb1a39eaf83edeeed432e2a68a6f",
+                "url": "https://api.github.com/repos/composer/installers/zipball/d78064c68299743e0161004f2de3a0204e33b804",
+                "reference": "d78064c68299743e0161004f2de3a0204e33b804",
                 "shasum": ""
             },
-            "type": "library",
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Hurad",
+                "ImageCMS",
+                "MODX Evo",
+                "Mautic",
+                "OXID",
+                "Plentymarkets",
+                "RadPHP",
+                "SMF",
+                "Thelia",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "attogram",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "cockpit",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lithium",
+                "magento",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "moodle",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "puppet",
+                "reindex",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "yawik",
+                "zend",
+                "zikula"
+            ],
+            "time": "2016-08-13 20:53:52"
+        },
+        {
+            "name": "liftux/liftux-core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LiftUX/plugins-core.git",
+                "reference": "8fbe79b0ccfd7880311c84dacedb0aab1c5bc214"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LiftUX/plugins-core/zipball/8fbe79b0ccfd7880311c84dacedb0aab1c5bc214",
+                "reference": "8fbe79b0ccfd7880311c84dacedb0aab1c5bc214",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "v1.*",
+                "php": ">=5.6"
+            },
+            "type": "wordpress-muplugin",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -91,11 +202,18 @@
                 }
             ],
             "description": "A PHP library of classes and interfaces used in the composition of WordPress plugins authored by Lift",
+            "homepage": "https://liftux.com",
+            "keywords": [
+                "hooks",
+                "liftux",
+                "plugin",
+                "wordpress"
+            ],
             "support": {
                 "source": "https://github.com/LiftUX/plugins-core/tree/master",
                 "issues": "https://github.com/LiftUX/plugins-core/issues"
             },
-            "time": "2017-01-18 22:08:42"
+            "time": "2017-01-27 02:49:29"
         }
     ],
     "packages-dev": [
@@ -318,12 +436,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "416fb8ad1d095a87f1d21bc40711843cd122fd4a"
+                "reference": "68099b02b60bbf3b088ff5cb67bf506770ef9cac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/416fb8ad1d095a87f1d21bc40711843cd122fd4a",
-                "reference": "416fb8ad1d095a87f1d21bc40711843cd122fd4a",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/68099b02b60bbf3b088ff5cb67bf506770ef9cac",
+                "reference": "68099b02b60bbf3b088ff5cb67bf506770ef9cac",
                 "shasum": ""
             },
             "require": {
@@ -364,7 +482,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2016-03-31 10:24:22"
+            "time": "2017-01-23 09:23:06"
         },
         {
             "name": "doctrine/lexer",
@@ -673,12 +791,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "f0e07ebe648e37dcb7cc289e23aab675fb7f7e87"
+                "reference": "e238c79b5c9df054760340c8a12a3a949f34306a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/f0e07ebe648e37dcb7cc289e23aab675fb7f7e87",
-                "reference": "f0e07ebe648e37dcb7cc289e23aab675fb7f7e87",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/e238c79b5c9df054760340c8a12a3a949f34306a",
+                "reference": "e238c79b5c9df054760340c8a12a3a949f34306a",
                 "shasum": ""
             },
             "require": {
@@ -700,6 +818,7 @@
                 "jackalope/jackalope-doctrine-dbal": "^1.1.5",
                 "phpunit/phpunit": "^4.8|^5.0",
                 "propel/propel1": "~1.7",
+                "symfony/expression-language": "^2.6|^3.0",
                 "symfony/filesystem": "^2.1",
                 "symfony/form": "~2.1|^3.0",
                 "symfony/translation": "^2.1|^3.0",
@@ -740,7 +859,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2017-01-11 12:04:28"
+            "time": "2017-01-19 15:33:25"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -2736,12 +2855,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "ebb3c2abe0940a703f08e0cbe373f62d97d40231"
+                "reference": "699fe81c8a158753be1be3da4768a2ab69a52aa6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/ebb3c2abe0940a703f08e0cbe373f62d97d40231",
-                "reference": "ebb3c2abe0940a703f08e0cbe373f62d97d40231",
+                "url": "https://api.github.com/repos/symfony/process/zipball/699fe81c8a158753be1be3da4768a2ab69a52aa6",
+                "reference": "699fe81c8a158753be1be3da4768a2ab69a52aa6",
                 "shasum": ""
             },
             "require": {
@@ -2777,7 +2896,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:30:24"
+            "time": "2017-01-21 16:40:50"
         },
         {
             "name": "symfony/stopwatch",
@@ -2898,12 +3017,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "3b1a3188efea75ec7c0419a2568b6e5f82031811"
+                "reference": "b618d88164933080ebe303ce099487369ccfc868"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/3b1a3188efea75ec7c0419a2568b6e5f82031811",
-                "reference": "3b1a3188efea75ec7c0419a2568b6e5f82031811",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/b618d88164933080ebe303ce099487369ccfc868",
+                "reference": "b618d88164933080ebe303ce099487369ccfc868",
                 "shasum": ""
             },
             "require": {
@@ -2963,7 +3082,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-12 19:24:25"
+            "time": "2017-01-23 08:25:05"
         },
         {
             "name": "symfony/yaml",
@@ -2971,12 +3090,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "a7be1238e556929b5a07aa8188d938078e467fab"
+                "reference": "7928849b226f065dae93ec0e8be3b829f73ba67b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/a7be1238e556929b5a07aa8188d938078e467fab",
-                "reference": "a7be1238e556929b5a07aa8188d938078e467fab",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7928849b226f065dae93ec0e8be3b829f73ba67b",
+                "reference": "7928849b226f065dae93ec0e8be3b829f73ba67b",
                 "shasum": ""
             },
             "require": {
@@ -3018,7 +3137,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-09 14:37:34"
+            "time": "2017-01-21 17:10:26"
         },
         {
             "name": "twig/twig",
@@ -3026,12 +3145,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "9b3796b14088e5c9039de6cf2291566c95aa76c1"
+                "reference": "a1c1f01eac45b68d6f17c3b499297b93e1a47321"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9b3796b14088e5c9039de6cf2291566c95aa76c1",
-                "reference": "9b3796b14088e5c9039de6cf2291566c95aa76c1",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a1c1f01eac45b68d6f17c3b499297b93e1a47321",
+                "reference": "a1c1f01eac45b68d6f17c3b499297b93e1a47321",
                 "shasum": ""
             },
             "require": {
@@ -3079,7 +3198,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-01-11 19:37:33"
+            "time": "2017-01-19 14:55:10"
         },
         {
             "name": "zendframework/zend-cache",
@@ -3783,7 +3902,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "liftux/plugins-core": 20,
+        "liftux/liftux-core": 20,
         "adbutler/adbutler-php": 20
     },
     "prefer-stable": false,
