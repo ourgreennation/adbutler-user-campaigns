@@ -68,6 +68,6 @@ class Client implements Service {
 	 * @return mixed           Response from call.
 	 */
 	public function call_static( $method, ...$args ) {
-		return call_user_func_array( array( API::class, $type ), $args );
+		return call_user_func_array( array( API::class, $method ), $args );
 	}
 }
