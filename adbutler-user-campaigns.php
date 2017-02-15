@@ -24,7 +24,6 @@ use Lift\AdbutlerUserCampaigns\Integrations\Notifications\Integration_Email_Noti
 define( 'ADBUTLER_CONTRIBUTED_CREATIVES_VERSION', '0.1.0' );
 define( 'ADBUTLER_CONTRIBUTED_CREATIVES_DIR', __DIR__ );
 define( 'ADBUTLER_CONTRIBUTED_CREATIVES_FILE', __FILE__ );
-define( 'ADBUTLER_CONTRIBUTED_CREATIVES_TEST', true );
 define( 'ADBUTLER_CONTRIBUTED_CREATIVES_URI', \plugins_url( '', __FILE__ ) );
 
 require_once( ADBUTLER_CONTRIBUTED_CREATIVES_DIR . '/vendor/autoload.php' );
