@@ -88,7 +88,6 @@ class Integration_Create_Banner extends Base_Integration implements Integration 
 				}
 
 				if ( $this->fields_present_on( $creative ) ) {
-					error_log( print_r( $creative, true ) );
 					$name = $creative['name'];
 					$creative_url = $creative['creative']['url'];
 					$location = $creative['location'];
