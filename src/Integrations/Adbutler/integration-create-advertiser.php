@@ -93,7 +93,7 @@ class Integration_Create_Advertiser extends Base_Integration implements Integrat
 			$response = $this->create_advertiser( $descriptive_name, $user_data->user_email );
 			$data = $response->getData();
 		} catch ( \Exception $e ) {
-			wp_die( esc_html( $e->getMessage() ) );
+			wp_die( esc_html( 'Create User Error' . $e->getMessage() ) );
 		}
 
 		// If we haven't thrown, request was most likely successful, let's make sure and then update.
