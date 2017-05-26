@@ -99,7 +99,7 @@ class Integration_Create_Campaign extends Base_Integration implements Integratio
 			$response = $this->create_campaign( $title , intval( $advertiser_id ) );
 			$data = $response->getData();
 		} catch ( \Exception $e ) {
-			wp_die( 'Client Error' . esc_html( $e->getMessage() ) );
+			wp_die( 'Create Campaign Error' . esc_html( $e->getMessage() ) );
 		}
 
 		// If we didn't catch and die above, we probably have a good campaign id.  Let's make sure.
