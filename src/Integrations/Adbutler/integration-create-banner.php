@@ -88,6 +88,7 @@ class Integration_Create_Banner extends Base_Integration implements Integration 
 				}
 
 				if ( $this->fields_present_on( $creative ) ) {
+					error_log( print_r( $creative, true ) );
 					$name = $creative['name'];
 					$creative_url = $creative['creative']['url'];
 					$location = $creative['location'];
@@ -96,7 +97,7 @@ class Integration_Create_Banner extends Base_Integration implements Integration 
 						$create = $this->create_banner( $name, $creative_url, $location, $alt );
 						$create_data = $create->getData();
 					} catch ( \Exception $e ) {
-						wp_die( 'Client Error: ' . esc_html( $e->getMessage() ) );
+						wp_die( 'Create Banner Error: ' . esc_html( $e->getMessage() ) );
 					}
 
 					try {
@@ -181,8 +182,14 @@ class Integration_Create_Banner extends Base_Integration implements Integration 
 	 */
 	public function link_banner( $creative_data, $advertiser_id, $campaign_id ) {
 		return CampaignAssignment::create([
-			'campaign' => intval( $campaign_id ),
-			'advertisement' => [ 'id' => $creative_data['id'], 'type' => 'banner' ],
+			'campaign' => [
+				'id' => intval( $campaign_id ),
+				'type' => 'banner_campaign',
+			],
+			'advertisement' => [
+				'id' => $creative_data['id'],
+				'type' => 'image_banner',
+			],
 			'weight' => 2,
 			'active' => true,
 		]);
